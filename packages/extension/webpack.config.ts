@@ -65,7 +65,7 @@ const config: webpack.Configuration = {
   },
   devtool: 'cheap-module-source-map',
   output: {
-    publicPath: 'https://localhost:4001/',
+    publicPath: isDev ? 'https://localhost:4001/' : '/',
     clean: true,
     filename: (pathData) => ['content', 'popover'].includes(pathData?.chunk?.name || '') ? '[name].js' : '[name].[contenthash:8].js'
   },
@@ -114,8 +114,8 @@ const config: webpack.Configuration = {
     server: {
       type: 'https',
       options: {
-        key: './key.pem',
-        cert: './cert.pem'
+        key: './build/webpack_key.pem',
+        cert: './build/webpack_cert.pem'
       }
     }
     // https: {

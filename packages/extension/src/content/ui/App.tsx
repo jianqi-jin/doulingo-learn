@@ -22,8 +22,13 @@ const App = () => {
 export const init = (root: HTMLDivElement) => {
   createRoot(root).render(<App />);
 }
-export const initListenCenter = (root: HTMLDivElement) => {
-  createRoot(root).render(<ListenCenter />);
+export const initListenCenter = () => {
+  setTimeout(() => {
+    const rootListenCenter = document.createElement('div');
+    rootListenCenter.id = 'doulingo-ext-root-listen-center';
+    document.getElementsByClassName('popoverDom')[0].appendChild(rootListenCenter);
+    createRoot(rootListenCenter).render(<ListenCenter />);
+  }, 1e3);
 }
 
 export default App;
