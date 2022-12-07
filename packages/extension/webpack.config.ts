@@ -54,6 +54,7 @@ const config: webpack.Configuration = {
           options: {
             presets: [
               ['@babel/preset-env', { targets: "defaults" }],
+              '@babel/preset-typescript',
               '@babel/preset-react'
             ]
           }
@@ -82,6 +83,19 @@ const config: webpack.Configuration = {
     new HtmlWebpackPlugin({
       filename: 'content.html',
       chunks: ['content']
+    }),
+    new webpack.ProgressPlugin({
+      activeModules: false,
+      entries: true,
+      handler(percentage, message, ...args) {
+        // custom logic
+      },
+      modules: true,
+      modulesCount: 5000,
+      profile: false,
+      dependencies: true,
+      dependenciesCount: 10000,
+      percentBy: null,
     })
   ],
   devServer: {
@@ -97,10 +111,17 @@ const config: webpack.Configuration = {
       "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
     },
     port: 4001,
-    https: {
-      key: './key.pem',
-      cert: './cert.pem',
+    server: {
+      type: 'https',
+      options: {
+        key: './key.pem',
+        cert: './cert.pem'
+      }
     }
+    // https: {
+    //   key: './key.pem',
+    //   cert: './cert.pem',
+    // }
   }
 };
 

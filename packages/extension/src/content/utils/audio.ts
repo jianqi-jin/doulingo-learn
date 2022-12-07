@@ -4,6 +4,19 @@ const getTeacherAudio = () => {
   return document.getElementById('teacherAudio');
 };
 
+const initAudio = ({
+  onended
+}) => {
+  const audio = getTeacherAudio();
+  const cb = () => {
+    onended && onended();
+  };
+  audio?.addEventListener('waiting', cb);
+  return () => {
+    audio?.removeEventListener('waiting', cb);
+  };
+};
+
 const play = () => {
   const audio = getTeacherAudio();
   audio.loop = true;
@@ -16,5 +29,6 @@ const pause = () => {
 
 export {
   play,
-  pause
+  pause,
+  initAudio
 };

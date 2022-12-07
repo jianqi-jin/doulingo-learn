@@ -4,11 +4,14 @@
  * @description content.ts
 */
 
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import App from './content/ui/App';
+import App, { init, initListenCenter } from './content/ui/App';
 
 const root = document.createElement('div');
 root.id = 'doulingo-ext-root';
 document.body.appendChild(root);
-createRoot(root).render(App());
+init(root);
+
+const rootListenCenter = document.createElement('div');
+rootListenCenter.id = 'doulingo-ext-root-listen-center';
+document.getElementsByClassName('popoverDom')[0].appendChild(rootListenCenter);
+initListenCenter(rootListenCenter);
