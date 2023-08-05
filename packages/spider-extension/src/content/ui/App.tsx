@@ -14,7 +14,7 @@ const App = () => {
   const [val, setVal] = useState('');
   const [list, setList] = useState<any[]>([]);
   const handleCopy = () => {
-    const output = list.map(item => `${item.name}	${item.highPrice}	${item.price}	${item.info}		${item.class}	${item.picture}`.replace('\n', ' ')).join('\n');
+    const output = list.map(item => `${item.name}	${item.highPrice}	${item.price}	${item.info}			${item.class}			${item.picture}`.replace('\n', ' ')).join('\n');
     navigator.clipboard.writeText(output).then(() => {
       Toast.success('复制成功');
     }).catch(e => {
@@ -31,7 +31,7 @@ const App = () => {
         class: document.querySelectorAll('iframe')[1].contentWindow.document.querySelector('#tab-header > mt-view').innerText,
         name: itemDOM.querySelector('.spuitem-spuitem-components-food-item-header')?.innerText,
         price: itemDOM.querySelector('.index-flashprice-price')?.innerText,
-        info: itemDOM.querySelector('.spuitem-spuitem-components-spu-tag-container')?.innerText,
+        info: itemDOM.querySelector('.spuitem-spuitem-components-spu-tag-container')?.innerText?.trim(),
         highPrice: itemDOM.querySelector('.index-flashprice-originPrice')?.innerText,
         picture: itemDOM.querySelector('.mt-image')?.getAttribute('style')?.split?.('url("')?.[1]?.split('")')?.[0] || ''
       };
