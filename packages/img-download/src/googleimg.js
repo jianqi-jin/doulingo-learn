@@ -5,9 +5,10 @@ const main = (url) => {
   url.replace(/id=(.*?)&hl/, (match, $1) => {
     pkg = $1;
   });
-
+  console.log('start...', url);
   fetch(url)
     .then((res) => {
+      console.log('got res...');
       return res.text();
     })
     .then((res) => {
@@ -35,6 +36,9 @@ const main = (url) => {
             );
           });
       });
+    })
+    .catch(e => {
+      console.log('req error');
     });
 };
 
